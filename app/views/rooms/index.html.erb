@@ -1,0 +1,23 @@
+<div class="chat-container">
+  <aside class="sidebar">
+    <h2>Rooms</h2>
+    <div id="rooms">
+      <%= render @rooms %>
+    </div>
+    
+    <div class="new-room-form">
+      <h3>New Room</h3>
+      <%= form_with(model: @new_room) do |form| %>
+        <%= form.text_field :name, placeholder: "Room name..." %>
+        <%= form.submit "Create" %>
+      <% end %>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="welcome-screen">
+      <h1>Welcome to Rails Chat</h1>
+      <p>Select a room from the sidebar to start chatting in real-time.</p>
+    </div>
+  </main>
+</div>

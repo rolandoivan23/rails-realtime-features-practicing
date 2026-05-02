@@ -1,0 +1,4 @@
+<%# This tells Turbo to replace the form with a fresh, empty one after successful submission %>
+<%= turbo_stream.replace "new_message_form" do %>
+  <%= render "messages/form", room: @room, message: @room.messages.new %>
+<% end %>

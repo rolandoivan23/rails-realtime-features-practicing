@@ -1,0 +1,25 @@
+<div class="chat-container">
+  <aside class="sidebar">
+    <h2><%= link_to "Rooms", rooms_path %></h2>
+    <div id="rooms">
+      <%= render Room.all %>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="room-header">
+      <h1>#<%= @room.name %></h1>
+    </header>
+
+    <%# This is the magic line that subscribes the page to Action Cable broadcasts for this specific room %>
+    <%= turbo_stream_from @room %>
+
+    <div id="messages" class="messages-list">
+      <%= render @messages %>
+    </div>
+
+    <footer class="message-input">
+      <%= render "messages/form", room: @room, message: @new_message %>
+    </footer>
+  </main>
+</div>

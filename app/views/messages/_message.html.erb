@@ -1,0 +1,10 @@
+<div id="<%= dom_id message %>" class="message-bubble">
+  <div class="message-content">
+    <%= message.content %>
+  </div>
+  <% if message.created_at %>
+    <small class="message-time">
+      <%= message.created_at.strftime("%I:%M %p") %>
+    </small>
+  <% end %>
+</div>
