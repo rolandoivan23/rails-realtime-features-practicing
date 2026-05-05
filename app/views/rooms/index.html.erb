@@ -1,13 +1,15 @@
 <div class="chat-container">
   <aside class="sidebar">
     <h2>Rooms</h2>
+    
+    <%= turbo_stream_from "rooms" %>
     <div id="rooms">
       <%= render @rooms %>
     </div>
     
     <div class="new-room-form">
       <h3>New Room</h3>
-      <%= form_with(model: @new_room) do |form| %>
+      <%= form_with(model: @new_room, id: "new_room_form") do |form| %>
         <%= form.text_field :name, placeholder: "Room name..." %>
         <%= form.submit "Create" %>
       <% end %>

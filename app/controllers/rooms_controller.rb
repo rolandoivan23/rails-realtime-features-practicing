@@ -13,8 +13,13 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to @room, notice: "Room was successfully created."
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @room, notice: "Room was successfully created." }
+      end
     else
+      @rooms = Room.all
+      @new_room = @room
       render :index, status: :unprocessable_entity
     end
   end

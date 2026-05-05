@@ -1,6 +1,8 @@
 <div class="chat-container">
   <aside class="sidebar">
     <h2><%= link_to "Rooms", rooms_path %></h2>
+    
+    <%= turbo_stream_from "rooms" %>
     <div id="rooms">
       <%= render Room.all %>
     </div>
