@@ -7,9 +7,10 @@ class ApplicationController < ActionController::Base
   def current_user
     if session[:user_id]
       @current_user ||= User.find_by(id: session[:user_id])
-      # Ensure encrypted cookie is set for Action Cable
-      if @current_user && cookies.encrypted[:user_id].nil?
-        cookies.encrypted[:user_id] = session[:user_id]
+      # Always sync encrypted cookie with session to prevent stale IDs
+      if @current_user && cookies.encrypted[:user_id] != session[:user_id]
+        Rails.logger.info "SYNCING CABLE COOKIE for user: #{@current_user.name}"
+        cookies.encrypted[:user_id] = { value: session[:user_id], expires: 1.month.from_now }
       end
     end
     @current_user

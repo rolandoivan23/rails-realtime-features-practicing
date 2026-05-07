@@ -1,9 +1,6 @@
-<div id="users" class="users-list">
+<div class="users-list">
   <h3>Online Users</h3>
-  <% users.each do |user| %>
-    <div class="user-online">
-      <span class="status-indicator"></span>
-      <%= user.name %>
-    </div>
-  <% end %>
+  <div id="online_users">
+    <%= render partial: "users/user_status", collection: users, as: :user %>
+  </div>
 </div>

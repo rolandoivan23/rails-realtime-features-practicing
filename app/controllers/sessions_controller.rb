@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:name])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      cookies.encrypted[:user_id] = user.id
+      cookies.encrypted[:user_id] = { value: user.id, expires: 1.month.from_now }
+      user.appear # Trigger real-time broadcast immediately
       redirect_to rooms_path, notice: "Logged in successfully!"
     else
       flash.now[:alert] = "Invalid name or password"
