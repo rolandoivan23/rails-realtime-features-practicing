@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_07_021443) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_07_024200) do
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_07_021443) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer "connection_count", default: 0
     t.datetime "created_at", null: false
     t.string "name"
     t.boolean "online", default: false

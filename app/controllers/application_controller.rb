@@ -5,7 +5,14 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id])
+      # Ensure encrypted cookie is set for Action Cable
+      if @current_user && cookies.encrypted[:user_id].nil?
+        cookies.encrypted[:user_id] = session[:user_id]
+      end
+    end
+    @current_user
   end
 
   def authenticate_user!
