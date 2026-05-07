@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user.disappear if current_user
     session[:user_id] = nil
     cookies.delete(:user_id)
     redirect_to root_path, notice: "Logged out!"
