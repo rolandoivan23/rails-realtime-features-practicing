@@ -24,6 +24,17 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <header class="app-header">
+        <span class="user-info">Logged in as <strong><%= current_user.name %></strong></span>
+        <%= button_to "Logout", logout_path, method: :delete, class: "btn-logout" %>
+      </header>
+    <% end %>
+
+    <% flash.each do |type, msg| %>
+      <div class="flash flash-<%= type %>"><%= msg %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

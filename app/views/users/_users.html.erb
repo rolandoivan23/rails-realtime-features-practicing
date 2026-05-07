@@ -1,0 +1,9 @@
+<div id="users" class="users-list">
+  <h3>Online Users</h3>
+  <% users.each do |user| %>
+    <div class="user-online">
+      <span class="status-indicator"></span>
+      <%= user.name %>
+    </div>
+  <% end %>
+</div>

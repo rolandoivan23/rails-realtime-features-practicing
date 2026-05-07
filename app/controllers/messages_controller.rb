@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = @room.messages.new(message_params)
+    @message.user = current_user
 
     if @message.save
       # No need for redirect_to or explicit turbo_stream response here if we rely on

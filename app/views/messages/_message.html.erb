@@ -1,4 +1,7 @@
-<div id="<%= dom_id message %>" class="message-bubble">
+<div id="<%= dom_id message %>" class="message-bubble <%= "message-mine" if message.user == current_user %>">
+  <div class="message-author">
+    <%= message.user&.name || "Unknown" %>
+  </div>
   <div class="message-content">
     <%= message.content %>
   </div>
