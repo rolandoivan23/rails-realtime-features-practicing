@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "pages/home"
   get "signup", to: "users#new"
   post "signup", to: "users#create"
   get "login", to: "sessions#new"
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  root "rooms#index"
+  root "pages#home"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

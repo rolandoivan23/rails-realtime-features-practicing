@@ -1,0 +1,81 @@
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <h1>Rails Real-time Learning Dashboard</h1>
+    <p>This project is a sandbox designed to explore and demonstrate the modern "Rails Way" of building interactive, real-time applications.</p>
+    <div class="cta-buttons">
+      <%= link_to "Enter Chat Rooms", rooms_path, class: "btn-primary large" %>
+      <% unless current_user %>
+        <%= link_to "Sign Up", signup_path, class: "btn-secondary large" %>
+      <% end %>
+    </div>
+  </header>
+
+  <section class="learning-grid">
+    <div class="learning-card">
+      <div class="card-icon">📡</div>
+      <h2>Action Cable</h2>
+      <p>The backbone of real-time in Rails. It integrates WebSockets with the rest of your Rails application, allowing for a full-stack, bi-directional communication channel.</p>
+      <ul>
+        <li><strong>Connection:</strong> Handles authentication and user identification.</li>
+        <li><strong>Channel:</strong> Organizes communication into specific topics (like <code>AppearanceChannel</code>).</li>
+        <li><strong>Stream:</strong> The actual data flow between server and client.</li>
+      </ul>
+    </div>
+
+    <div class="learning-card">
+      <div class="card-icon">⚡</div>
+      <h2>Turbo Streams</h2>
+      <p>A part of Hotwire that allows the server to deliver HTML changes to specific parts of the page over WebSockets or HTTP responses.</p>
+      <ul>
+        <li><strong>Zero JS:</strong> You can update the UI without writing custom JavaScript.</li>
+        <li><strong>Declarative:</strong> Use <code>broadcasts_to</code> in your model to automate updates.</li>
+        <li><strong>Efficiency:</strong> Only the changed fragment is sent, reducing bandwidth.</li>
+      </ul>
+    </div>
+
+    <div class="learning-card">
+      <div class="card-icon">🧱</div>
+      <h2>Hotwire Philosophy</h2>
+      <p>"HTML Over The Wire." Instead of sending JSON and having a complex JS framework render it, Rails sends the final HTML, keeping logic on the server.</p>
+      <ul>
+        <li><strong>Turbo Drive:</strong> Makes navigating between pages feel like a single-page app.</li>
+        <li><strong>Turbo Frames:</strong> Allows parts of a page to be updated independently.</li>
+        <li><strong>Stimulus:</strong> A modest JS framework for the "sprinkles" of interactivity.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="architecture-breakdown">
+    <h2>How it works in this app</h2>
+    
+    <div class="step-list">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div>
+          <h3>User Presence</h3>
+          <p>When you log in, the <code>AppearanceChannel</code> establishes a connection. It uses a <code>connection_count</code> to track how many tabs you have open, ensuring you only go "offline" when the last tab is closed.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-num">2</span>
+        <div>
+          <h3>Messaging Flow</h3>
+          <p>When a message is saved, the <code>Message</code> model triggers a broadcast. Turbo then identifies every user currently viewing that <code>Room</code> and injects the new message partial into their list instantly.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="step-num">3</span>
+        <div>
+          <h3>Surgical Updates</h3>
+          <p>Instead of refreshing the whole list, we use <code>broadcast_append_to</code> and <code>broadcast_remove_to</code>. This makes the UI feel smooth and "alive" as elements join and leave the DOM dynamically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="dashboard-footer">
+    <p>Explore the code in <code>app/models/user.rb</code> and <code>app/channels/appearance_channel.rb</code> to see these concepts in action!</p>
+  </footer>
+</div>

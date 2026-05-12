@@ -1,6 +1,7 @@
 <div class="chat-container">
   <aside class="sidebar">
-    <h2>Rooms</h2>
+    <h2><%= link_to "Dashboard", root_path %></h2>
+    <h3>Rooms</h3>
     
     <%= turbo_stream_from "rooms" %>
     <div id="rooms">
